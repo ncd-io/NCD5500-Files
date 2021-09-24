@@ -810,11 +810,11 @@
             }
         }
         function get_turn_on_relay_command(relay_number){
-            if(relay_number < 8){
+            if(relay_number < 9){
               return wrap_api([254, (107+relay_number), 1]);
             }else{
               bank_number = Math.round(relay_number/8);
-              relay_command = relay_number - ((Math.round(relay_number/8))*8);
+              relay_number = relay_number - (bank_number*8);
               return wrap_api([254, (108+relay_number), bank_number]);
             }
             // return wrap_api([254, 48, (relay_number-1), 0]);
@@ -826,11 +826,11 @@
 			send_command(cmd, kwargs);
 		}
         function get_turn_off_relay_command(relay_number){
-          if(relay_number < 8){
+          if(relay_number < 9){
             return wrap_api([254, (99+relay_number), 1]);
           }else{
             bank_number = Math.round(relay_number/8);
-            relay_command = relay_number - ((Math.round(relay_number/8))*8);
+            relay_number = relay_number - (bank_number*8);
             return wrap_api([254, (100+relay_number), bank_number]);
           }
         }
